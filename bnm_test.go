@@ -2,7 +2,7 @@ package bnm_test
 
 import (
 	"testing"
-	"github.com/osoianmarcel/bnm-go"
+	"github.com/OsoianMarcel/bnm-go"
 	"time"
 )
 
