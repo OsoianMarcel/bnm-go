@@ -6,3 +6,8 @@ go:
   - 1.8.x
   - 1.9.x
   - master
+
+git:
+  depth: 3
+
+go_import_path: github.com/osoianmarcel/bnm-go
