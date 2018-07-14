@@ -6,17 +6,17 @@ import (
 	"net/http"
 )
 
-// Main Inst instance
-type Inst struct {}
+// Inst it's main package structure
+type Inst struct{}
 
-// Create new Inst instance
+// NewBnm function is used to
 func NewBnm() Inst {
 	return Inst{}
 }
 
 // Request BNM rates by using Query
 func (bnm Inst) Request(q Query) (Result, error) {
-	res, err := getRequest(q.GenerateUri())
+	res, err := getRequest(q.GenerateURI())
 
 	if err != nil {
 		return Result{}, err

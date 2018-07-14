@@ -2,8 +2,9 @@ package bnm_test
 
 import (
 	"testing"
-	"github.com/OsoianMarcel/bnm-go"
 	"time"
+
+	"github.com/OsoianMarcel/bnm-go"
 )
 
 // Get specific date for testing
@@ -36,29 +37,29 @@ func TestQuery_DateToString(t *testing.T) {
 	}
 }
 
-// Test method GenerateUri()
-func TestQuery_GenerateUri(t *testing.T) {
+// Test method GenerateURI()
+func TestQuery_GenerateURI(t *testing.T) {
 	query, err := getSpecificQuery()
 	if err != nil {
 		t.Error(err)
 	}
 
 	expected := "http://www.bnm.md/ro/official_exchange_rates?get_xml=1&date=05.08.2017"
-	result := query.GenerateUri() 
+	result := query.GenerateURI()
 	if result != expected {
 		t.Errorf("incorrect URI, expected: %s, result: %s", expected, result)
 	}
 }
 
-// Test method GetId()
-func TestQuery_GetId(t *testing.T) {
+// Test method GetID()
+func TestQuery_GetID(t *testing.T) {
 	query, err := getSpecificQuery()
 	if err != nil {
 		t.Error(err)
 	}
 
 	expected := "ro_05.08.2017"
-	result := query.GetId() 
+	result := query.GetID()
 	if result != expected {
 		t.Errorf("incorrect id, expected: %s, result: %s", expected, result)
 	}
