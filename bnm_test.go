@@ -2,8 +2,9 @@ package bnm_test
 
 import (
 	"testing"
-	"github.com/OsoianMarcel/bnm-go"
 	"time"
+
+	"github.com/OsoianMarcel/bnm-go"
 )
 
 // Test Request() method
@@ -19,7 +20,6 @@ func TestInst_Request_Success(t *testing.T) {
 		t.Error("empty rates")
 	}
 }
-
 
 func TestInst_Request_Error(t *testing.T) {
 	inst := bnm.NewBnm()

@@ -2,6 +2,7 @@ package bnm
 
 import (
 	"encoding/xml"
+	"errors"
 	"io/ioutil"
 	"net/http"
 )
@@ -34,6 +35,10 @@ func getRequest(uri string) ([]byte, error) {
 
 	// It is important to defer resp.Body.Close(), else resource leaks will occur
 	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return []byte{}, errors.New("Bad HTTP status code")
+	}
 
 	// Will print site contents (HTML) to output
 	return ioutil.ReadAll(resp.Body)

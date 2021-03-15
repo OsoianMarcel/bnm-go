@@ -1,10 +1,10 @@
 package bnm
 
 import (
-	"testing"
-	"net/http/httptest"
-	"net/http"
 	"bytes"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
 // Test parseResponse() when error occured
