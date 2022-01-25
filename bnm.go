@@ -37,7 +37,7 @@ func getRequest(uri string) ([]byte, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return []byte{}, errors.New("Bad HTTP status code")
+		return []byte{}, errors.New("bad HTTP status code")
 	}
 
 	// Will print site contents (HTML) to output

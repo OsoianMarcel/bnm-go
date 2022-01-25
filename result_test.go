@@ -1,8 +1,9 @@
 package bnm_test
 
 import (
-	"github.com/OsoianMarcel/bnm-go"
 	"testing"
+
+	"github.com/OsoianMarcel/bnm-go"
 )
 
 // Get Result struct filled for testing
