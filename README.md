@@ -10,33 +10,33 @@ Go library used to get official exchange rates of National bank of Moldova
 package main
 
 import (
-	"fmt"
-	"log"
-	"time"
+    "fmt"
+    "log"
+    "time"
 
-	"github.com/OsoianMarcel/bnm-go"
+    "github.com/OsoianMarcel/bnm-go"
 )
 
 func main() {
-	// Create new bnm instance
-	inst := bnm.NewBnm()
+    // Create new bnm instance
+    inst := bnm.NewBnm()
 
-	// Request today's exchange rates in romanian language
-	res, err := inst.Request(bnm.NewQuery("ro", time.Now()))
-	if err != nil {
-		log.Fatal(err)
-	}
+    // Request today's exchange rates in romanian language
+    res, err := inst.Request(bnm.NewQuery("ro", time.Now()))
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	// Find USD exchange rate
-	if rate, ok := res.FindByCode("USD"); ok {
-		fmt.Printf("%s (%s): %.2f\n", rate.Name, rate.Code, rate.Value)
+    // Find USD exchange rate
+    if rate, ok := res.FindByCode("USD"); ok {
+        fmt.Printf("%s (%s): %.2f\n", rate.Name, rate.Code, rate.Value)
         // Dolar S.U.A. (USD): 18.04
-	} else {
-		fmt.Printf("USD not found!\n")
-	}
-	
-	// Print all exchange rates
-	fmt.Printf("\n%+v\n", res.Rates)
+    } else {
+        fmt.Printf("USD not found!\n")
+    }
+    
+    // Print all exchange rates
+    fmt.Printf("\n%+v\n", res.Rates)
 }
 ```
 
