@@ -1,3 +1,3 @@
 module github.com/OsoianMarcel/bnm-go
 
-go 1.14
+go 1.24

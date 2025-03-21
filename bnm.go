@@ -3,7 +3,7 @@ package bnm
 import (
 	"encoding/xml"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -41,7 +41,7 @@ func getRequest(uri string) ([]byte, error) {
 	}
 
 	// Will print site contents (HTML) to output
-	return ioutil.ReadAll(resp.Body)
+	return io.ReadAll(resp.Body)
 }
 
 // Parse XML response
