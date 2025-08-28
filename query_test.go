@@ -4,62 +4,39 @@ import (
 	"testing"
 	"time"
 
-	"github.com/OsoianMarcel/bnm-go"
+	"github.com/OsoianMarcel/bnm-go/v2"
 )
 
-// Get specific date for testing
-func getSpecificDate() (time.Time, error) {
-	return time.Parse("2006-Jan-02", "2017-Aug-05")
-}
-
-// Get specific query for testing
-func getSpecificQuery() (bnm.Query, error) {
-	date, err := getSpecificDate()
+func getSpecificDate() time.Time {
+	t, err := time.Parse("2006-Jan-02", "2017-Aug-05")
 	if err != nil {
-		return bnm.Query{}, err
+		panic(err)
 	}
 
-	return bnm.NewQuery("ro", date), nil
+	return t
 }
 
-// Test method DateToString()
-func TestQuery_DateToString(t *testing.T) {
-	query, err := getSpecificQuery()
-	if err != nil {
-		t.Error(err)
-	}
+func getSpecificQuery() bnm.Query {
+	return bnm.NewQuery(getSpecificDate(), bnm.LANG_EN)
+}
 
-	expected := "05.08.2017"
-	result := query.DateToString()
+// Test method RequestURL()
+func TestQuery_RequestURL(t *testing.T) {
+	query := getSpecificQuery()
 
+	expected := "http://www.bnm.md/en/official_exchange_rates?get_xml=1&date=05.08.2017"
+	result := query.RequestURL()
 	if result != expected {
-		t.Errorf("incorrect date, expected: %s, result: %s", expected, result)
-	}
-}
-
-// Test method GenerateURI()
-func TestQuery_GenerateURI(t *testing.T) {
-	query, err := getSpecificQuery()
-	if err != nil {
-		t.Error(err)
-	}
-
-	expected := "http://www.bnm.md/ro/official_exchange_rates?get_xml=1&date=05.08.2017"
-	result := query.GenerateURI()
-	if result != expected {
-		t.Errorf("incorrect URI, expected: %s, result: %s", expected, result)
+		t.Errorf("incorrect URL, expected: %s, result: %s", expected, result)
 	}
 }
 
 // Test method GetID()
-func TestQuery_GetID(t *testing.T) {
-	query, err := getSpecificQuery()
-	if err != nil {
-		t.Error(err)
-	}
+func TestQuery_ID(t *testing.T) {
+	query := getSpecificQuery()
 
-	expected := "ro_05.08.2017"
-	result := query.GetID()
+	expected := "en_05.08.2017"
+	result := query.ID()
 	if result != expected {
 		t.Errorf("incorrect id, expected: %s, result: %s", expected, result)
 	}

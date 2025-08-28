@@ -5,29 +5,38 @@ import (
 	"time"
 )
 
-// Query struct used to describe request query
+// Supported API languages.
+const (
+	LANG_EN = "en"
+	LANG_RO = "ro"
+	LANG_RU = "ru"
+)
+
+// Query represents a request for exchange rates on a specific date and in a specific language.
 type Query struct {
-	Locale string
-	Date   time.Time
+	Date time.Time
+	Lang string
 }
 
-// NewQuery is used to create new Query instance
-func NewQuery(locale string, date time.Time) Query {
-	return Query{Locale: locale, Date: date}
+// NewQuery creates a new Query for the given date and language.
+func NewQuery(date time.Time, lang string) Query {
+	return Query{
+		Date: date,
+		Lang: lang,
+	}
 }
 
-// GenerateURI is used to generate URI used for GET request
-func (q Query) GenerateURI() string {
-	return fmt.Sprintf("http://www.bnm.md/%s/official_exchange_rates?get_xml=1&date=%s", q.Locale, q.DateToString())
+// RequestURL returns the URL used to request exchange rates from the BNM API.
+func (q Query) RequestURL() string {
+	return fmt.Sprintf("http://www.bnm.md/%s/official_exchange_rates?get_xml=1&date=%s", q.Lang, q.dateToStr())
 }
 
-// DateToString converts date to string
-func (q Query) DateToString() string {
+// ID returns a unique identifier for the query.
+func (q Query) ID() string {
+	return q.Lang + "_" + q.dateToStr()
+}
+
+func (q Query) dateToStr() string {
 	const dateFormat = "02.01.2006"
 	return q.Date.Format(dateFormat)
-}
-
-// GetID returns query id
-func (q Query) GetID() string {
-	return q.Locale + "_" + q.DateToString()
 }
